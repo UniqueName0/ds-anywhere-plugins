@@ -246,15 +246,15 @@ namespace wasmelon {
         emu->arm9writeCallback(addr, size, value);
   }
 
-  void setARM9stepCallback(emscripten::val callback) {
+  void WasmEmulator::setARM9stepCallback(emscripten::val callback) {
     arm9stepCallback = callback;
   }
 
-  void setARM9readCallback(emscripten::val callback) {
+  void WasmEmulator::setARM9readCallback(emscripten::val callback) {
     arm9readCallback = callback;
   }
 
-  void setARM9writeCallback(emscripten::val callback) {
+  void WasmEmulator::setARM9writeCallback(emscripten::val callback) {
     arm9writeCallback = callback;
   }
 
