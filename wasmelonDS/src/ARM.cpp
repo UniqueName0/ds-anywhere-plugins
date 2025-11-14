@@ -650,6 +650,8 @@ void ARMv5::Execute()
         else
 #endif
         {
+            PM9step(PM_ptr, R[15]);
+
             if (CPSR & 0x20) // THUMB
             {
                 if constexpr (mode == CPUExecuteMode::InterpreterGDB)
@@ -1301,4 +1303,3 @@ void ARMv4::BusWrite32(u32 addr, u32 val)
     NDS.ARM7Write32(addr, val);
 }
 }
-

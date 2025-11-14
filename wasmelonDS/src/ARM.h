@@ -233,6 +233,9 @@ public:
     ARMv5(melonDS::NDS& nds, std::optional<GDBArgs> gdb, bool jit);
     ~ARMv5();
 
+    void* PM_ptr;
+    void (*PM9step)(void*, unsigned int);
+
     void Reset() override;
 
     void DoSavestate(Savestate* file) override;

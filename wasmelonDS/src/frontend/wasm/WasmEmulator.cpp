@@ -40,10 +40,17 @@ namespace wasmelon {
 
   Firmware WasmEmulator::genFirmware() {
     return firmwareSettings.toFirmware();
-  }  
+  }
 
   void WasmEmulator::initialize(bool direct) {
     nds->Reset();
+
+    nds->ARM9.PM9step = &ARM9step;
+    nds->ARM9.PM_ptr = this;
+    nds->PM_ptr = this;
+    nds->PM9read = &ARM9read;
+    nds->PM9write = &ARM9write;
+
     if (direct) {
       nds->SetupDirectBoot("game");
     }
@@ -146,7 +153,7 @@ namespace wasmelon {
   uintptr_t WasmEmulator::getAudioBuffer() {
     return reinterpret_cast<uintptr_t>(this->audioBuffer);
   }
-  
+
   int WasmEmulator::getAudioSamples() {
     return audioSamples;
   }
@@ -155,6 +162,8 @@ namespace wasmelon {
     touchX = x;
     touchY = y;
     isTouching = true;
+
+    emuInstance->pluginManager->clickBottomScreen(x, y); //TODO: top screen click
   }
 
   void WasmEmulator::releaseScreen() {
@@ -193,7 +202,7 @@ namespace wasmelon {
   void WasmEmulator::setInput(melonDS::u32 input) {
     buttonInput = input;
   }
-  
+
   std::string WasmEmulator::getCartTitle() {
     auto cart = nds->NDSCartSlot.GetCart();
     if (cart == nullptr) {
@@ -204,7 +213,7 @@ namespace wasmelon {
     if (banner == nullptr) {
       return "__ERROR__";
     }
-    
+
     // TODO: localization support to include title in user's locale
 
     std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> converter;
@@ -212,8 +221,43 @@ namespace wasmelon {
       banner->EnglishTitle,
       std::char_traits<char16_t>::length(banner->EnglishTitle)
     );
-    
+
     return converter.to_bytes(englishUtf16Title);
+  }
+
+  void* WasmEmulator::getEmuPtr() {
+    return (void*)this;
+  }
+
+
+  void ARM9step(void* self, unsigned int addr){
+    WasmEmulator* emu = (PluginManager*)self;
+    if (!arm9stepCallback.isUndefined() && !arm9stepCallback.isNull())
+        emu.arm9stepCallback(addr);
+  }
+
+  void ARM9read(void* self, unsigned int addr, unsigned char size){
+    WasmEmulator* emu = (PluginManager*)self;
+    if (!arm9readCallback.isUndefined() && !arm9readCallback.isNull())
+        emu.arm9readCallback(addr, size);
+  }
+
+  void ARM9write(void* self, unsigned int addr, unsigned char size, void* value){
+    WasmEmulator* emu = (PluginManager*)self;
+    if (!arm9writeCallback.isUndefined() && !arm9writeCallback.isNull())
+        emu.arm9writeCallback(addr, size, value);
+  }
+
+  void setARM9stepCallback(emscripten::val callback) {
+    arm9stepCallback = callback;
+  }
+
+  void setARM9readCallback(emscripten::val callback) {
+    arm9readCallback = callback;
+  }
+
+  void setARM9writeCallback(emscripten::val callback) {
+    arm9writeCallback = callback;
   }
 
 }
@@ -237,5 +281,9 @@ EMSCRIPTEN_BINDINGS(WasmEmulator) {
     .function("releaseScreen", &wasmelon::WasmEmulator::releaseScreen)
     .function("setInput", &wasmelon::WasmEmulator::setInput)
     .function("getCartTitle", &wasmelon::WasmEmulator::getCartTitle)
-    ;
+    .function("getEmuPtr", &wasmelon::WasmEmulator::getEmuPtr, emscripten::allow_raw_pointers())
+    .function("setARM9stepCallback", &wasmelon::WasmEmulator::setARM9stepCallback)
+    .function("setARM9readCallback", &wasmelon::WasmEmulator::setARM9readCallback)
+    .function("setARM9writeCallback", &wasmelon::WasmEmulator::setARM9writeCallback)
+  ;
 }
