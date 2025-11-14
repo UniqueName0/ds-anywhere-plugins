@@ -45,11 +45,11 @@ namespace wasmelon {
   void WasmEmulator::initialize(bool direct) {
     nds->Reset();
 
-    nds->ARM9.PM9step = &ARM9step;
+    nds->ARM9.PM9step = ARM9step;
     nds->ARM9.PM_ptr = this;
     nds->PM_ptr = this;
-    nds->PM9read = &ARM9read;
-    nds->PM9write = &ARM9write;
+    nds->PM9read = ARM9read;
+    nds->PM9write = ARM9write;
 
     if (direct) {
       nds->SetupDirectBoot("game");
