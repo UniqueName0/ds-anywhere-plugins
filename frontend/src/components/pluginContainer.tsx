@@ -1,6 +1,6 @@
 import "./pluginContainer.css";
 
-import Panzoom from "@panzoom/panzoom";
+import panzoom from "panzoom";
 
 import Noclip from "../plugins/noclip/main";
 import { useEffect } from "preact/hooks";
@@ -12,7 +12,7 @@ export default function PluginContainer(): any {
     var elem: HTMLElement | SVGElement | null =
       document.querySelector(".full-container");
     if (elem != null && pluginContainer != null) {
-      Panzoom(elem, {
+      panzoom(elem, {
         zoomDoubleClickSpeed: 1, // disables zoom on double click
         beforeMouseDown: function (e: Event) {
           // allow mouse-down panning only if altKey is down. Otherwise - ignore
