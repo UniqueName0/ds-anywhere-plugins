@@ -1,6 +1,6 @@
 import "./pluginContainer.css";
 
-import Noclip from "../plugins/noclip/src/main";
+import Noclip from "../plugins/noclip/main";
 
 export default function PluginContainer(): any {
   return (

@@ -1,7 +1,7 @@
 let pluginContainer = document.querySelector("#plugin-container");
 
 var element = document.querySelector(".full-container");
-const panzoom = Panzoom(element, {
+const pz = panzoom(element, {
   zoomDoubleClickSpeed: 1, // disables zoom on double click
   noBind: true,
 });
@@ -14,7 +14,7 @@ elem.addEventListener("pointerdown", (event) => {
   if (event.ctrlKey) {
     selectedWindow = event.target;
   } else {
-    panzoom.handleDown(event);
+    pz.handleDown(event);
   }
 });
 document.addEventListener("pointermove", (event) => {
@@ -28,11 +28,11 @@ document.addEventListener("pointermove", (event) => {
     prevX = mouseX;
     prevY = mouseY;
   } else {
-    panzoom.handleMove(event);
+    pz.handleMove(event);
   }
 });
-document.addEventListener("pointerup", panzoom.handleUp);
+document.addEventListener("pointerup", pz.handleUp);
 document.addEventListener("pointerup", (event) => {
   selectedWindow = null;
-  panzoom.handleUp(event);
+  pz.handleUp(event);
 });
