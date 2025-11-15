@@ -30,7 +30,7 @@ export default function PluginContainer(): any {
           selectedWindow = event.target as HTMLElement | null;
         }
       });
-      pluginContainer.addEventListener("pointermove", (evt) => {
+      document.addEventListener("pointermove", (evt) => {
         let event = evt as PointerEvent;
         if (event.ctrlKey && selectedWindow != null) {
           const mouseX = event.clientX;
