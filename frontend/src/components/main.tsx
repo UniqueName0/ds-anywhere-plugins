@@ -1,8 +1,8 @@
-import { useState } from 'preact/hooks';
-import './main.css';
-import Emulator from './emulator';
-import Entrypoint from './entrypoint';
-import SettingsModal from './settings';
+import { useState } from "preact/hooks";
+import "./main.css";
+import Emulator from "./emulator";
+import Entrypoint from "./entrypoint";
+import SettingsModal from "./settings";
 
 export function Main() {
   const [emulating, setEmulating] = useState(false);
@@ -26,23 +26,26 @@ export function Main() {
 
   return (
     <>
-      <div className="demo-page-container place-content-center">
-        {emulating ? (
-          <Emulator
-            onOpenSettings={onOpenSettings}
-            stopEmulating={stopEmulating}
-          />
-        ) : (
-          <Entrypoint 
-            onStartEmulating={startEmulating} 
-            onOpenSettings={onOpenSettings}
-          />
-        )}
+      <div class="full-container">
+        <div className="demo-page-container place-content-center">
+          {emulating ? (
+            <Emulator
+              onOpenSettings={onOpenSettings}
+              stopEmulating={stopEmulating}
+            />
+          ) : (
+            <Entrypoint
+              onStartEmulating={startEmulating}
+              onOpenSettings={onOpenSettings}
+            />
+          )}
+        </div>
+        <script>
+          var element = document.querySelector('#full-container');
+          panzoom(element);
+        </script>
       </div>
-      <SettingsModal
-        showing={settingsOpen}
-        onClose={onCloseSettings}
-      />
+      <SettingsModal showing={settingsOpen} onClose={onCloseSettings} />
     </>
-  )
+  );
 }
