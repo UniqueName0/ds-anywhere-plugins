@@ -18,7 +18,7 @@ export default function PluginContainer(): any {
           var shouldIgnore = (e as PointerEvent).ctrlKey;
           return shouldIgnore;
         },
-        beforeWheel: function (e) {
+        beforeWheel: function () {
           // allow wheel-zoom only if altKey is down. Otherwise - ignore
           var shouldIgnore = window.settingsOpen;
           return shouldIgnore;

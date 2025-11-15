@@ -6,6 +6,10 @@ import SettingsModal from "./settings";
 
 import PluginContainer from "./pluginContainer";
 
+declare global {
+  var settingsOpen: boolean;
+}
+
 export function Main() {
   const [emulating, setEmulating] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
