@@ -43,12 +43,15 @@ export function Main() {
       </div>
       <SettingsModal showing={settingsOpen} onClose={onCloseSettings} />
       <script>
+        type fuck = {onDoubleClick: Function};
+        var options: fuck = {
+            onDoubleClick: (e) => {
+                return false;
+            }
+        };
+
         var element = document.querySelector('.demo-page-container');
-        panzoom(element, {
-          onDoubleClick: function(e: any) {
-            return false; // stops double click zoom
-          }
-        });
+        panzoom(element, options);
       </script>
     </>
   );
