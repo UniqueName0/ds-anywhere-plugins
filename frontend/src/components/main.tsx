@@ -29,7 +29,13 @@ export function Main() {
   return (
     <>
       <div class="full-container">
-        <div className="demo-page-container place-content-center">
+        <div
+          className={
+            emulating
+              ? "demo-page-container place-content-center"
+              : "entry-container place-content-center"
+          }
+        >
           {emulating ? (
             <Emulator
               onOpenSettings={onOpenSettings}

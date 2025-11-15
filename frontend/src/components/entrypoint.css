@@ -50,8 +50,9 @@ p {
     border-color: lightgray;
 }
 
-.demo-page-container {
+.entry-container {
     padding: 2vh 1vw;
+    margin: auto;
     display: flex;
     flex-direction: column;
     gap: 10px;
