@@ -1,6 +1,6 @@
 import "./main.css";
 
-export default function noclip() {
+export default function Noclip(): any {
   return (
     <>
       <div id="noclip">
