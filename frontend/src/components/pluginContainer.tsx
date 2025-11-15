@@ -7,7 +7,7 @@ import { useEffect } from "preact/hooks";
 
 export default function PluginContainer(): any {
   useEffect(() => {
-    let pluginContainer = document.querySelector("#plugin-container");
+    //let pluginContainer = document.querySelector("#plugin-container");
 
     var elem: HTMLElement | SVGElement | null =
       document.querySelector(".full-container");
@@ -17,13 +17,14 @@ export default function PluginContainer(): any {
         noBind: true,
       });
 
-      var selectedWindow = null;
+      var selectedWindow: HTMLElement | null = null;
       var prevX = 0;
       var prevY = 0;
 
-      elem.addEventListener("pointerdown", (event) => {
+      elem.addEventListener("pointerdown", (evt: Event) => {
+        let event = evt as PointerEvent;
         if (event.ctrlKey) {
-          selectedWindow = event.target;
+          selectedWindow = event.target as HTMLElement | null;
         } else {
           pz.handleDown(event);
         }
