@@ -50,8 +50,10 @@ export default function PluginContainer(): any {
           prevY = mouseY;
         }
       });
-      pluginContainer.addEventListener("pointerup", (_) => {
+      document.addEventListener("pointerup", (_) => {
         selectedWindow = null;
+        prevX = 0;
+        prevY = 0;
       });
     }
   }, []);
