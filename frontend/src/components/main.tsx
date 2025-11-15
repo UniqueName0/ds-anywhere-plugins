@@ -4,7 +4,7 @@ import Emulator from "./emulator";
 import Entrypoint from "./entrypoint";
 import SettingsModal from "./settings";
 
-import Noclip from "../plugins/noclip/src/main";
+import pluginContainer from ./pluginContainer";
 
 export function Main() {
   const [emulating, setEmulating] = useState(false);
@@ -42,7 +42,8 @@ export function Main() {
             />
           )}
         </div>
-        {emulating ? <Noclip /> : ""}
+
+        {emulating ? <pluginContainer /> : ""}
       </div>
       <SettingsModal showing={settingsOpen} onClose={onCloseSettings} />
       <script src="static/setup.js"></script>

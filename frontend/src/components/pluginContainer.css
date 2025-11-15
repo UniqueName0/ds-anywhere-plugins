@@ -1,0 +1,7 @@
+#plugin-container {
+    > * {
+        background-color: lightgray;
+        border: 2px solid black;
+        border-radius: 20px;
+    }
+}

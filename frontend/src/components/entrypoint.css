@@ -52,7 +52,6 @@ p {
 
 .demo-page-container {
     padding: 2vh 1vw;
-    margin: auto;
     display: flex;
     flex-direction: column;
     gap: 10px;
