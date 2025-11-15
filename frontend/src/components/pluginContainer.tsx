@@ -15,8 +15,7 @@ export default function PluginContainer(): any {
       panzoom(elem, {
         zoomDoubleClickSpeed: 1, // disables zoom on double click
         beforeMouseDown: function (e: Event) {
-          // allow mouse-down panning only if altKey is down. Otherwise - ignore
-          var shouldIgnore = !(e as PointerEvent).ctrlKey;
+          var shouldIgnore = (e as PointerEvent).ctrlKey;
           return shouldIgnore;
         },
       });
