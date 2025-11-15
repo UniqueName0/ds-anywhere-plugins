@@ -4,7 +4,7 @@ import Emulator from "./emulator";
 import Entrypoint from "./entrypoint";
 import SettingsModal from "./settings";
 
-import noclip_plugin from "../plugins/noclip/src/main";
+import noclip from "../plugins/noclip/src/main";
 
 export function Main() {
   const [emulating, setEmulating] = useState(false);
@@ -44,6 +44,7 @@ export function Main() {
         </div>
       </div>
       <SettingsModal showing={settingsOpen} onClose={onCloseSettings} />
+      <noclip />
       <script src="static/panzoom.js"></script>
     </>
   );
