@@ -37,8 +37,12 @@ export default function PluginContainer(): any {
           if (prevX != 0 && prevY != 0) {
             console.log("change X: " + (mouseX - prevX));
             console.log("change Y: " + (mouseY - prevY));
-            selectedWindow.style.left += mouseX - prevX;
-            selectedWindow.style.top += mouseY - prevY;
+            const currentLeft = parseInt(selectedWindow.style.left) || 0;
+            const newLeft = currentLeft + mouseX - prevX;
+            selectedWindow.style.left = `${newLeft}px`;
+            const currentTop = parseInt(selectedWindow.style.left) || 0;
+            const newTop = currentTop + mouseX - prevX;
+            selectedWindow.style.top = `${newTop}px`;
           }
           prevX = mouseX;
           prevY = mouseY;
@@ -46,7 +50,6 @@ export default function PluginContainer(): any {
           pz.handleMove(event);
         }
       });
-      document.addEventListener("pointerup", pz.handleUp);
       document.addEventListener("pointerup", (event) => {
         selectedWindow = null;
         pz.handleUp(event);
