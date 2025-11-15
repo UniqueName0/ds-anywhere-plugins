@@ -1,1 +1,1 @@
-emcc -I "../../../../../wasmelonDS/src" -I "../../../../../wasmelonDS/src/frontend" -I "../../../../../wasmelonDS/src/frontend/wasm" -D BUILD_QT_SDL=OFF -D ENABLE_OGLRENDERER=OFF -sIMPORTED_MEMORY -sMODULARIZE -sEXPORT_NAME=Noclip main.cpp -o ../../../../public/static/test.js
+emcc -I "../../../../../wasmelonDS/src" -I "../../../../../wasmelonDS/src/frontend" -I "../../../../../wasmelonDS/src/frontend/wasm" -D BUILD_QT_SDL=OFF -D ENABLE_OGLRENDERER=OFF -sIMPORTED_MEMORY=1 -sALLOW_MEMORY_GROWTH=1 -sMODULARIZE=1 -sEXPORT_NAME=Noclip main.cpp -o ../../../../public/static/test.js
