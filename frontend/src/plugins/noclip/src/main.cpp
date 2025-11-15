@@ -16,12 +16,12 @@ void get_player_pos() {
 
 }
 
-int get_x() {
-
+unsigned int get_x() {
+    return *(unsigned int*)&emu->nds->MainRAM[0x143b20];
 }
 
-int get_y() {
-
+unsigned int get_y() {
+    return *(unsigned int*)&emu->nds->MainRAM[0x143b24];
 }
 
 void frame(){
@@ -44,4 +44,6 @@ void frame(){
 
 EMSCRIPTEN_BINDINGS(my_module) {
     function("init_emu", &init_emu);
+    function("get_x", &get_x);
+    function("get_y", &get_y);
 }
