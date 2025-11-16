@@ -69,7 +69,10 @@ export default function Noclip(): any {
         <h1>noclip plugin</h1>
         <h3 id="pos"></h3>
         <KeyboardBinder bindings={bindingConfigs} onChange={setBindings} />
-        <input type="number" value={speed} onInput={handleSpeedChange} />
+        <span class="m-1">
+          speed:&nbsp;
+          <input type="number" value={speed} onInput={handleSpeedChange} />
+        </span>
       </div>
       <script src="static/test.js"></script>
       <script src="static/load_noclip_plugin.js"></script>
