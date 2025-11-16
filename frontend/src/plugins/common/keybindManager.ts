@@ -66,7 +66,7 @@ class KeybindManager {
   clearKeybinds(): void {
     this.keybinds.clear();
     // Notify all listeners that keybinds were cleared
-    this.listeners.forEach((callbacks, action) => {
+    this.listeners.forEach((callbacks, _) => {
       callbacks.forEach((callback) => callback(""));
     });
   }

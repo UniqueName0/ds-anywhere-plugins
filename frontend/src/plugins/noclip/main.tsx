@@ -2,7 +2,7 @@ import "./main.css";
 
 import { useEffect } from "preact/hooks";
 import KeybindButton from "../common/KeybindButton";
-import { keybindManager, useKeybinds } from "../common/keybindManager";
+import { keybindManager } from "../common/keybindManager";
 
 declare global {
   var Noclip: any;
@@ -10,7 +10,7 @@ declare global {
 
 export default function Noclip() {
   useEffect(() => {
-    const handleKeyPress = (event) => {
+    const handleKeyPress = (event: Event) => {
       if (keybindManager.checkEvent(event, "up")) {
         event.preventDefault();
         window.Noclip.set_y(window.Noclip.get_y() - 100);
