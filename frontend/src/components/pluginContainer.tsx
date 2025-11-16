@@ -2,7 +2,7 @@ import "./pluginContainer.css";
 
 import panzoom from "panzoom";
 
-import NoclipComp from "../plugins/noclip/main";
+import Noclip from "../plugins/noclip/main";
 import { useEffect } from "preact/hooks";
 
 export default function PluginContainer(): any {
@@ -73,7 +73,7 @@ export default function PluginContainer(): any {
   return (
     <>
       <div id="plugin-container">
-        <NoclipComp />
+        <Noclip />
       </div>
 
       <script src="static/plugins-loaded.js"></script>
