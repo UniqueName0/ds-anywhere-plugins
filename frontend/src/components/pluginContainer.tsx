@@ -23,6 +23,10 @@ export default function PluginContainer(): any {
           var shouldIgnore = window.settingsOpen;
           return shouldIgnore;
         },
+        filterKey: function (): boolean {
+          // don't let panzoom handle keyboard events:
+          return true;
+        },
       });
 
       var selectedWindow: HTMLElement | null = null;
