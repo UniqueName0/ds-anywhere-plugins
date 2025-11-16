@@ -25,7 +25,7 @@ declare global {
 }
 
 export default function NoclipComp(): any {
-  const self = (async () => {
+  (async () => {
     while (!window.hasOwnProperty("Noclip"))
       //wait for wasm to load
       await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -41,7 +41,7 @@ export default function NoclipComp(): any {
 
     window.plugins.push(plug);
     return plug;
-  })().then(() => {
+  })().then((self) => {
     const [bindings, setBindings] = useState<KeyBinding[]>([]);
 
     useKeyBindings(bindings);
@@ -57,21 +57,21 @@ export default function NoclipComp(): any {
       const handleKeyAction = (event: CustomEvent) => {
         const { bindingId } = event.detail;
 
-        const x = window.Noclip.get_x();
-        const y = window.Noclip.get_y();
+        const x = self.get_x();
+        const y = self.get_y();
 
         switch (bindingId) {
           case "move-up":
-            window.Noclip.set_y(y - 100);
+            self.set_y(y - 100);
             break;
           case "move-down":
-            window.Noclip.set_y(y + 100);
+            self.set_y(y + 100);
             break;
           case "move-left":
-            window.Noclip.set_x(x - 100);
+            self.set_x(x - 100);
             break;
           case "move-right":
-            window.Noclip.set_x(x + 100);
+            self.set_x(x + 100);
             break;
         }
       };
