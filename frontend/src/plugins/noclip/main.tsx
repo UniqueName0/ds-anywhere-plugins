@@ -66,8 +66,7 @@ export default function Noclip(): any {
   return (
     <>
       <div id="noclip">
-        <h1>test plugin</h1>
-        <h3>player pos</h3>
+        <h1>noclip plugin</h1>
         <h3 id="pos"></h3>
         <KeyboardBinder bindings={bindingConfigs} onChange={setBindings} />
         <input type="number" value={speed} onInput={handleSpeedChange} />
