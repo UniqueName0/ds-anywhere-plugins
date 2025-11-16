@@ -4,6 +4,10 @@ import { useEffect } from "preact/hooks";
 import KeybindButton from "../common/KeybindButton";
 import { keybindManager, useKeybinds } from "../common/keybindManager";
 
+declare global {
+  var Noclip: any;
+}
+
 export default function Noclip() {
   useEffect(() => {
     const handleKeyPress = (event) => {
