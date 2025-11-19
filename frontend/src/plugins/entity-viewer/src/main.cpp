@@ -72,4 +72,5 @@ EMSCRIPTEN_BINDINGS(EntityViewer) {
     function("get_entity_type", &get_entity_type);
     function("get_entity_x", &get_entity_x);
     function("get_entity_y", &get_entity_y);
+    function("valid_ents", &valid_ents);
 }
