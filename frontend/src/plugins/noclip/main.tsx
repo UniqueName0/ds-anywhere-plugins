@@ -97,8 +97,7 @@ export default function Noclip(): any {
           <input type="number" value={speed} onInput={handleSpeedChange} />
         </span>
       </div>
-      <script src="static/test.js"></script>
-      <script src="static/load_noclip_plugin.js"></script>
+      <script src="static/Noclip.js"></script>
     </>
   );
 }

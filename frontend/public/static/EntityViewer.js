@@ -680,7 +680,7 @@ function createExportWrapper(name, nargs) {
 var wasmBinaryFile;
 
 function findWasmBinary() {
-    return locateFile('test.wasm');
+    return locateFile('EntityViewer.wasm');
 }
 
 function getBinarySync(file) {
