@@ -29,7 +29,7 @@ void set_y(unsigned int val) {
 
 
 
-EMSCRIPTEN_BINDINGS(my_module) {
+EMSCRIPTEN_BINDINGS(noclip) {
     function("init_emu", &init_emu);
     function("get_x", &get_x);
     function("get_y", &get_y);

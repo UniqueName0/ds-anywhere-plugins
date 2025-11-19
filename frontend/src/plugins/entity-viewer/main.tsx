@@ -31,7 +31,7 @@ function showEntityDetails(index: number, element: HTMLDivElement) {
   `;
 }
 
-export default function Noclip(): any {
+export default function EntityViewer(): any {
   let [room, setroom] = useState(0);
 
   useEffect(() => {

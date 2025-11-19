@@ -66,7 +66,7 @@ unsigned int get_entity_type(int i) {
 }
 
 
-EMSCRIPTEN_BINDINGS(my_module) {
+EMSCRIPTEN_BINDINGS(EntityViewer) {
     function("init_emu", &init_emu);
     function("get_room", &get_room);
     function("get_entity_type", &get_entity_type);
