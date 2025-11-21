@@ -46,8 +46,8 @@ unsigned int valid_ents() {
     return retval;
 }
 
-unsigned char get_room() {
-    return *(unsigned char*)&emu->nds->MainRAM[0x143c1e];
+unsigned short int get_room() {
+    return *(unsigned short int*)&emu->nds->MainRAM[0x143c1e];
 }
 
 unsigned int get_entity_x(int i) {
