@@ -32,12 +32,11 @@ function showEntityDetails(index: number, element: HTMLDivElement) {
 }
 
 export default function EntityViewer(): any {
-  let [room, setroom] = useState(0);
+  let [room, setRoom] = useState(0);
 
   useEffect(() => {
     (async () => {
       while (!window.hasOwnProperty("EntityViewer"))
-        //wait for wasm to load
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
       var plug = await window.EntityViewer({ wasmMemory: wasmMemory });
@@ -46,32 +45,7 @@ export default function EntityViewer(): any {
       plug.perFrame = () => {
         if (self == null) return;
         let cur_room = plug.get_room();
-        console.log(`cur room: ${cur_room}`);
-        if (room != cur_room) {
-          // room changed
-          let entList = document.querySelector("#entity-list-box");
-          if (entList == null) return; // shouldnt ever be null
-          entList.innerHTML = "";
-
-          let ents = plug.valid_ents();
-          for (let i = 0; i < 0x40; i++) {
-            if ((ents & (1 << i)) !== 0) {
-              let entityElement = document.createElement("div");
-              entityElement.className =
-                "entity-item cursor-pointer p-1 hover:bg-gray-200";
-              entityElement.textContent = `Entity ${i}`;
-
-              // Add click handler to show entity details
-              entityElement.addEventListener("click", function () {
-                showEntityDetails(i, this);
-              });
-
-              entList.appendChild(entityElement);
-            }
-          }
-
-          setroom(cur_room);
-        }
+        if (room != cur_room) setRoom(cur_room);
       };
 
       window.plugins.push(plug);
@@ -79,10 +53,38 @@ export default function EntityViewer(): any {
     })();
   }, []);
 
+  useEffect(() => {
+    let entList = document.querySelector("#entity-list-box");
+    if (entList == null) return; // shouldnt ever be null
+    entList.innerHTML = "";
+
+    if (self) {
+      let ents = self.valid_ents();
+
+      for (let i = 0; i < 0x40; i++) {
+        if ((ents & (1 << i)) !== 0) {
+          let entityElement = document.createElement("div");
+          entityElement.className =
+            "entity-item cursor-pointer p-1 hover:bg-gray-200";
+          entityElement.textContent = `Entity ${i}`;
+
+          // Add click handler to show entity details
+          entityElement.addEventListener("click", function () {
+            showEntityDetails(i, this);
+          });
+
+          entList.appendChild(entityElement);
+        }
+      }
+    }
+  }, [room]);
+
+  // Render entities from state instead of manipulating DOM directly
   return (
     <>
       <div id="entity-viewer">
         <h1>entity viewer</h1>
+        <div>Current Room: {room}</div>
         <div class="flex flex-row text-base">
           <div
             id="entity-list-box"
