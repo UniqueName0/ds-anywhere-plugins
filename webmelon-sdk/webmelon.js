@@ -861,8 +861,7 @@
 
 (async () => {
   const memory = new WebAssembly.Memory({
-    initial: 100,
-    maximum: 10000,
+    initial: 16384,
     shared: true,
   });
 
