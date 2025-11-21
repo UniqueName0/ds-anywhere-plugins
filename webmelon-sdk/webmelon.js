@@ -862,7 +862,7 @@
 (async () => {
   const memory = new WebAssembly.Memory({
     initial: 100,
-    maximum: 100000,
+    maximum: 10000,
     shared: true,
   });
 
